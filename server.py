@@ -1,13 +1,13 @@
 import threading
 from flask import Flask, send_file, request
-from client import Client
+from query import insert
 from bot import start, new_request
 
 
-app = Flask(__name__)
+application = Flask(__name__)
 
 
-@app.route('/', methods=['GET', 'POST'])
+@application.route('/', methods=['GET', 'POST'])
 def main_page():
     if request.method == 'POST':
         data = []
@@ -15,14 +15,14 @@ def main_page():
             list = request.form.getlist(list_type)
             data.append(list[0])
 
-        client = Client(data).insert()
+        insert(f"""INSERT INTO contacts (name, phone, city, company) VALUES ('{data[0]}', '{data[1]}', '{data[2]}', '{data[3]}')""")
         new_request()
 
     return send_file('templates/test.html')
 
 
 def start_server():
-    app.run(port=8080)
+    application.run(port=8080)
 
 
 if __name__ == '__main__':
