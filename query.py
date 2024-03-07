@@ -13,7 +13,6 @@ def insert(data):
         print(f"Запись успешно вставлена ​​в таблицу {DB_NAME}")
         cursor.close()
         return cursor.lastrowid
-
     except sqlite3.Error as error:
         print("INS: Ошибка при работе с БД", error)
     finally:
@@ -32,7 +31,6 @@ def out(data):
         records = cursor.fetchall()
         cursor.close()
         return records
-
     except sqlite3.Error as error:
         print("OUT: Ошибка при работе с БД", error)
     finally:
@@ -51,7 +49,6 @@ def out_all_id():
         records = cursor.fetchall()
         cursor.close()
         return records
-
     except sqlite3.Error as error:
         print("OUT: Ошибка при работе с БД", error)
     finally:
@@ -70,7 +67,6 @@ def out_all_open():
         records = cursor.fetchall()
         cursor.close()
         return records
-
     except sqlite3.Error as error:
         print("OUT: Ошибка при работе с БД", error)
     finally:
@@ -89,7 +85,6 @@ def get_ids():
         records = cursor.fetchall()
         cursor.close()
         return records
-
     except sqlite3.Error as error:
         print("OUT: Ошибка при работе с БД", error)
     finally:
@@ -106,13 +101,10 @@ def auth(id):
         sqlite_select_query = """SELECT id from tg_authorized"""
         cursor.execute(sqlite_select_query)
         records = cursor.fetchall()
-
         cursor.close()
-
         for i in records:
             if i[0] == id:
                 return True
-
     except sqlite3.Error as error:
         print("OUT: Ошибка при работе с БД", error)
     finally:

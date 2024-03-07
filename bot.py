@@ -46,7 +46,7 @@ def get_all_open(message):
             res = query.out_all_open()
             if len(res) > 0:
                 for id in res:
-                    result = query.out(f"""SELECT name, phone, city, company, status, comment FROM contacts WHERE status='Open'""")
+                    result = query.out(f"""SELECT name, phone, city, company, status, comment FROM contacts WHERE id={id[0]}""")
                     result_string = f'ID: {id[0]}\nИмя: {result[0][0]}\nТелефон: {result[0][1]}\nГород: {result[0][2]}\nЗастройщик/компания: {result[0][3]}\nСтатус: {result[0][4]}\nКомментарий: {result[0][5]}'
                     bot.send_message(chat_id, result_string)
             else:
