@@ -6,22 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/style.css">
     <title>Test Form</title>
+    <script>
+        function validate_form() {
+            var name = document.getElementById('name').value;
+            var phone = document.getElementById('phone').value;
+            var city = document.getElementById('city').value;
+            var company = document.getElementById('company').value;
+
+            if (!name || !phone || !city || !company) {
+                alert('Пожалуйста, заполните все поля формы.');
+                return false;
+            }
+        }
+    </script>
 </head>
 
 <body>
     <div class="feedback">
-    <h1>Укажите данные для обратной связи</h1>
-    <form action='/' method='POST'>
-        <label for='name'>Ваше имя: </label>
-        <input type='text' id='name' name='name'><br>
-        <label for='phone'>Телефон: </label>
-        <input type='phone' id='phone' name='phone'><br>
-        <label for='city'>Город: </label>
-        <input type='city' id='city' name='city'><br>
-        <label for='company'>Какого застройщика Вы представляете? </label>
-        <input type='company' id='company' name='company'><br>
-        <input type='submit' value='Отправить'>
-    </form>
+        <h1>Укажите данные для обратной связи</h1>
+        <form action="/submit" method="post" onsubmit="return validate_form()">
+            <label for='name'>Ваше имя: </label>
+            <input type='text' id='name' name='name'><br>
+            <label for='phone'>Телефон: </label>
+            <input type='tel' id='phone' name='phone'><br>
+            <label for='city'>Город: </label>
+            <input type='text' id='city' name='city'><br>
+            <label for='company'>Какого застройщика Вы представляете? </label>
+            <input type='text' id='company' name='company'><br>
+            <input type='submit' value='Отправить'>
+        </form>
     </div>
 </body>
 

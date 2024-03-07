@@ -12,6 +12,7 @@ def insert(data):
         sqlite_connection.commit()
         print(f"Запись успешно вставлена ​​в таблицу {DB_NAME}")
         cursor.close()
+        return cursor.lastrowid
 
     except sqlite3.Error as error:
         print("INS: Ошибка при работе с БД", error)
@@ -46,6 +47,25 @@ def out_all_id():
         cursor = sqlite_connection.cursor()
         print("OUT: Подключен к БД")
         sqlite_select_query = """SELECT id from contacts"""
+        cursor.execute(sqlite_select_query)
+        records = cursor.fetchall()
+        cursor.close()
+        return records
+
+    except sqlite3.Error as error:
+        print("OUT: Ошибка при работе с БД", error)
+    finally:
+        if sqlite_connection:
+            sqlite_connection.close()
+            print("OUT: Соединение с БД закрыто")
+
+
+def out_all_open():
+    try:
+        sqlite_connection = sqlite3.connect(DB_NAME)
+        cursor = sqlite_connection.cursor()
+        print("OUT: Подключен к БД")
+        sqlite_select_query = """SELECT id from contacts WHERE status='Open'"""
         cursor.execute(sqlite_select_query)
         records = cursor.fetchall()
         cursor.close()
