@@ -1,11 +1,56 @@
-div.feedback {
-    margin: 0;
-    text-align: left;
-    position: absolute;
-    top: 40%;
-    bottom: 50%;
-    left: 50%;
-    right: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%)
+.navbar {
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom: 5px inset #85d4ff;
+	border-left: 5px solid #85d4ff;
+	border-right: 5px solid #85d4ff;
+}
+
+.page-footer {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-top: 5px outset #85d4ff;
+	border-left: 5px solid #85d4ff;
+	border-right: 5px solid #85d4ff;
+}
+
+.navbar-brand {
+	max-width: 50%;
+}
+
+.nav-link {
+	margin-right: var(--nav-link-margin-right);
+	font-size: 18px;
+	font-family: "Ubuntu", sans-serif;
+	font-weight: 700;
+	font-style: normal;
+	font-optical-sizing: auto;
+}
+
+.contact-button {
+	background-color: #85d4ff;
+	color: white;
+	font-size: 20px;
+	transition: background-color 0.3s;
+}
+
+.contact-button:hover {
+	color: white;
+	background-color: #172e74;
+}
+
+.footer-text {
+	font-size: 16px;
+	font-family: "Ubuntu", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	font-optical-sizing: auto;
+}
+
+.doclink {
+	font-size: 16px;
+	font-family: "Ubuntu", sans-serif;
+	font-weight: 400;
+	font-style: italic;
+	font-optical-sizing: auto;
 }

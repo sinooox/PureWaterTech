@@ -2,7 +2,6 @@ import telebot
 import query
 from config import TOKEN
 
-
 bot = telebot.TeleBot(TOKEN)
 
 
@@ -162,11 +161,14 @@ def new_request(id):
         result_string = f'ID: {id}\nИмя: {result[0][0]}\nТелефон: {result[0][1]}\nГород: {result[0][2]}\nЗастройщик/компания: {result[0][3]}\nСтатус: {result[0][4]}\nКомментарий: {result[0][5]}'
         for id in chat_id:
             chat_id = str(id)[1:-2]
-            bot.send_message(chat_id, 'Получена новая заяка!\n' + result_string)
+            bot.send_message(chat_id, 'Получена новая заявка!\n' + result_string)
     except Exception as error:
         bot.send_message(chat_id, 'Произошла ошибка: ' + str(error) + '\nПопробуйте снова')
 
 
 def start():
     print('Бот запущен!')
-    bot.polling(none_stop=True)
+    try:
+        bot.polling(none_stop=True)
+    except Exception as error:
+        print(error)

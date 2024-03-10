@@ -3,13 +3,32 @@ from flask import Flask, render_template, redirect, url_for, request
 from query import insert
 from bot import start, new_request
 
-
 application = Flask(__name__)
 
 
 @application.route('/')
 def main_page():
-    return render_template('test.html')
+    return render_template('index.html', title='PW Tech')
+
+
+@application.route('/technology')
+def technology():
+    return render_template('technology.html', title='Технология')
+
+
+@application.route('/team')
+def team():
+    return render_template('team.html', title='Команда')
+
+
+@application.route('/projects')
+def projects():
+    return render_template('projects.html', title='Проекты')
+
+
+@application.route('/contact')
+def contact():
+    return render_template('contact.html', title='Связаться с нами')
 
 
 @application.route('/submit', methods=['POST'])
@@ -27,11 +46,7 @@ def submit_form():
 
 
 def start_server():
-    while True:
-        try:
-            application.run(port=8080)
-        except Exception as error:
-            print(error)
+    application.run(port=8080)
 
 
 if __name__ == '__main__':
