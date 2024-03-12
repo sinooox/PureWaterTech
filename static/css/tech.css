@@ -1,0 +1,36 @@
+.tech_header {
+    font-size: 35px;
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-optical-sizing: auto;
+    text-align: center;
+}
+
+.tech_text {
+    font-size: 23px;
+    font-family: "Ubuntu", sans-serif;
+    font-style: normal;
+    font-optical-sizing: auto;
+}
+
+.tech {
+    width: 80%;
+    height: auto;
+    margin-left: 15%;
+    transition: opacity 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.tech.loaded {
+    animation: fadeIn 1s ease-in-out forwards;
+}

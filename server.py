@@ -45,6 +45,16 @@ def submit_form():
     return redirect(url_for('main_page'))
 
 
+@application.errorhandler(404)
+def not_found_error(error):
+    return render_template('404.html', title='404'), 404
+
+
+@application.errorhandler(500)
+def internal_error(error):
+    return render_template('500.html', title='500'), 500
+
+
 def start_server():
     application.run(port=8080)
 

@@ -1,9 +1,28 @@
 {% extends "layout.html" %}
 
 {% block base %}
+<link rel="stylesheet" href="../static/css/index.css">
 {% endblock %}
 
 {% block content %}
+
 <body>
+    <div class="index container-fluid">
+        <p class="index_main">Инновационная технология очистки воды</p>
+        <p class="additional">«Pure Water Tech» — это революционный проект, призванный повысить качество жизни людей –
+            обеспечить
+            бесперебойный доступ к питьевой воде, в неограниченном объеме, наивысшего качества, непосредственно в месте
+            проживания – квартире.<br><br>
+            Компания ООО «Приоритет МТ» более 20 лет успешно занимается проектированием, строительством, эксплуатацией и
+            обслуживанием систем водоподготовки на территории РФ и за ее пределами. На счету компании сотни введенных в
+            эксплуатацию
+            объектов водоподготовки.<br><br></p>
+        <img class="title_man" src="../static/images/title_man.png" alt="title_man">
+    </div>
+    <script>
+        window.addEventListener('load', function () {
+            document.querySelector('.title_man').classList.add('loaded');
+        });
+    </script>
 </body>
 {% endblock %}

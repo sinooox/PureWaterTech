@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block base %}
+{% endblock %}
+
+{% block content %}
+<style>
+    .err404 {
+        margin: 0;
+        text-align: left;
+        position: absolute;
+        top: 40%;
+        bottom: 50%;
+        left: 50%;
+        right: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%)
+    }
+</style>
+
+<div class="err404">
+    <h1>Страница не найдена</h1>
+    <p><a href="{{ url_for('main_page') }}">Вернуться назад</a></p>
+</div>
+{% endblock %}
