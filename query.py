@@ -25,7 +25,7 @@ def delete(id):
     try:
         sqlite_connection = sqlite3.connect(DB_NAME)
         cursor = sqlite_connection.cursor()
-        print("INS: Подключен к БД")
+        print("DEL: Подключен к БД")
         sqlite_delete_query = f"""DELETE FROM contacts WHERE id='{id}'"""
         cursor.execute(sqlite_delete_query)
         sqlite_connection.commit()
@@ -33,11 +33,11 @@ def delete(id):
         cursor.close()
         return cursor.lastrowid
     except sqlite3.Error as error:
-        print("INS: Ошибка при работе с БД", error)
+        print("DEL: Ошибка при работе с БД", error)
     finally:
         if sqlite_connection:
             sqlite_connection.close()
-            print("INS: Соединение с БД закрыто")
+            print("DEL: Соединение с БД закрыто")
 
 
 def out(data):
@@ -116,7 +116,7 @@ def auth(id):
     try:
         sqlite_connection = sqlite3.connect(DB_NAME)
         cursor = sqlite_connection.cursor()
-        print("OUT: Подключен к БД")
+        print("AUTH: Подключен к БД")
         sqlite_select_query = """SELECT id FROM tg_authorized"""
         cursor.execute(sqlite_select_query)
         records = cursor.fetchall()
@@ -125,8 +125,8 @@ def auth(id):
             if i[0] == id:
                 return True
     except sqlite3.Error as error:
-        print("OUT: Ошибка при работе с БД", error)
+        print("AUTH: Ошибка при работе с БД", error)
     finally:
         if sqlite_connection:
             sqlite_connection.close()
-            print("OUT: Соединение с БД закрыто")
+            print("AUTH: Соединение с БД закрыто")
