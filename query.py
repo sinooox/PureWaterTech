@@ -21,6 +21,25 @@ def insert(data):
             print("INS: Соединение с БД закрыто")
 
 
+def delete(id):
+    try:
+        sqlite_connection = sqlite3.connect(DB_NAME)
+        cursor = sqlite_connection.cursor()
+        print("INS: Подключен к БД")
+        sqlite_delete_query = f"""DELETE FROM contacts WHERE id='{id}'"""
+        cursor.execute(sqlite_delete_query)
+        sqlite_connection.commit()
+        print(f"Запись удалена из таблицы {DB_NAME}")
+        cursor.close()
+        return cursor.lastrowid
+    except sqlite3.Error as error:
+        print("INS: Ошибка при работе с БД", error)
+    finally:
+        if sqlite_connection:
+            sqlite_connection.close()
+            print("INS: Соединение с БД закрыто")
+
+
 def out(data):
     try:
         sqlite_connection = sqlite3.connect(DB_NAME)
@@ -44,7 +63,7 @@ def out_all_id():
         sqlite_connection = sqlite3.connect(DB_NAME)
         cursor = sqlite_connection.cursor()
         print("OUT: Подключен к БД")
-        sqlite_select_query = """SELECT id from contacts"""
+        sqlite_select_query = """SELECT id FROM contacts"""
         cursor.execute(sqlite_select_query)
         records = cursor.fetchall()
         cursor.close()
@@ -62,7 +81,7 @@ def out_all_open():
         sqlite_connection = sqlite3.connect(DB_NAME)
         cursor = sqlite_connection.cursor()
         print("OUT: Подключен к БД")
-        sqlite_select_query = """SELECT id from contacts WHERE status='Open'"""
+        sqlite_select_query = """SELECT id FROM contacts WHERE status='Open'"""
         cursor.execute(sqlite_select_query)
         records = cursor.fetchall()
         cursor.close()
@@ -80,7 +99,7 @@ def get_ids():
         sqlite_connection = sqlite3.connect(DB_NAME)
         cursor = sqlite_connection.cursor()
         print("OUT: Подключен к БД")
-        sqlite_select_query = """SELECT id from tg_authorized"""
+        sqlite_select_query = """SELECT id FROM tg_authorized"""
         cursor.execute(sqlite_select_query)
         records = cursor.fetchall()
         cursor.close()
@@ -98,7 +117,7 @@ def auth(id):
         sqlite_connection = sqlite3.connect(DB_NAME)
         cursor = sqlite_connection.cursor()
         print("OUT: Подключен к БД")
-        sqlite_select_query = """SELECT id from tg_authorized"""
+        sqlite_select_query = """SELECT id FROM tg_authorized"""
         cursor.execute(sqlite_select_query)
         records = cursor.fetchall()
         cursor.close()

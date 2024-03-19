@@ -154,6 +154,93 @@ def edit_comment(message):
         bot.send_message(chat_id, 'Произошла ошибка: ' + str(error) + '\nПопробуйте снова')
 
 
+@bot.message_handler(commands=['add'], content_types=['text'])
+def enter_name(message):
+    try:
+        if authorize(message):
+            chat_id = message.chat.id
+            bot.send_message(chat_id, 'Введите имя')
+            bot.register_next_step_handler(message, enter_phone)
+    except Exception as error:
+        bot.send_message(chat_id, 'Произошла ошибка: ' + str(error) + '\nПопробуйте снова')
+
+
+def enter_phone(message):
+    try:
+        if authorize(message):
+            global name
+            chat_id = message.chat.id
+            bot.send_message(chat_id, 'Введите номер телефона')
+            name = message.text
+            bot.register_next_step_handler(message, enter_city)
+    except Exception as error:
+        bot.send_message(chat_id, 'Произошла ошибка: ' + str(error) + '\nПопробуйте снова')
+
+
+def enter_city(message):
+    try:
+        if authorize(message):
+            global phone
+            chat_id = message.chat.id
+            bot.send_message(chat_id, 'Введите город')
+            phone = message.text
+            bot.register_next_step_handler(message, enter_company)
+    except Exception as error:
+        bot.send_message(chat_id, 'Произошла ошибка: ' + str(error) + '\nПопробуйте снова')
+
+
+def enter_company(message):
+    try:
+        if authorize(message):
+            global city
+            chat_id = message.chat.id
+            bot.send_message(chat_id, 'Введите компанию')
+            city = message.text
+            bot.register_next_step_handler(message, add)
+    except Exception as error:
+        bot.send_message(chat_id, 'Произошла ошибка: ' + str(error) + '\nПопробуйте снова')
+
+
+def add(message):
+    try:
+        if authorize(message):
+            global company
+            company = message.text
+            chat_id = message.chat.id
+            if name != None and phone != None and city != None and company != None:
+                query.insert(f"""INSERT INTO contacts (name, phone, city, company) VALUES ('{name}', '{phone}', '{city}', '{company}')""")
+                bot.send_message(chat_id, 'Запись успешно добавлена')
+            else:
+                bot.send_message(chat_id, 'Введен неверный ID заявки')
+    except Exception as error:
+        bot.send_message(chat_id, 'Произошла ошибка: ' + str(error) + '\nПопробуйте снова')
+
+
+@bot.message_handler(commands=['delete'], content_types=['text'])
+def enter_id_delete(message):
+    try:
+        if authorize(message):
+            chat_id = message.chat.id
+            bot.send_message(chat_id, 'Введите ID заявки, чтобы удалить её')
+            bot.register_next_step_handler(message, delete)
+    except Exception as error:
+        bot.send_message(chat_id, 'Произошла ошибка: ' + str(error) + '\nПопробуйте снова')
+
+
+def delete(message):
+    try:
+        if authorize(message):
+            chat_id = message.chat.id
+            entered_id = message.text
+            if entered_id != None and int(entered_id) <= query.out(f"""SELECT id FROM contacts ORDER BY id DESC LIMIT 1""")[0][0]:
+                query.delete(entered_id)
+                bot.send_message(chat_id, 'Запись успешно удалена')
+            else:
+                bot.send_message(chat_id, 'Введен неверный ID заявки')
+    except Exception as error:
+        bot.send_message(chat_id, 'Произошла ошибка: ' + str(error) + '\nПопробуйте снова')
+
+
 def new_request(id):
     try:
         chat_id = query.get_ids()
