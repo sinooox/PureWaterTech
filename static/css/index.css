@@ -36,6 +36,17 @@
     transition: opacity 1s ease-in-out;
 }
 
+@media (max-width: 768px) {
+    .index_main {
+        font-size: 1.5rem;
+    }
+
+    .additional {
+        font-size: 1rem;
+        max-width: 90%;
+    }
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;

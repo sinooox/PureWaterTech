@@ -16,8 +16,6 @@
         if (!name || !phone || !city || !company) {
             alert('Пожалуйста, заполните все поля формы.')
             return false
-        } else {
-            alert('Ваша заявка получена, скоро с вами свяжется наш представитель!')
         }
     }
 </script>
@@ -28,14 +26,14 @@
         <h1 class="feedback_header">Укажите данные для обратной связи</h1>
         <br>
         <form class="feedback_form" action="/submit" method="post" onsubmit="return validate_form()">
-            <label for="name">Ваше имя:&nbsp;&nbsp;</label>
-            <input type="text" id="name" name="name"><br>
-            <label for="phone">Телефон:&nbsp;&nbsp;</label>
-            <input type="tel" id="phone" name="phone"><br>
-            <label for="city">Город:&nbsp;&nbsp;</label>
-            <input type="text" id="city" name="city"><br>
-            <label for="company">Организация:&nbsp;&nbsp;</label>
-            <input type="text" id="company" name="company"><br>
+            <label for="name">Ваше имя:</label>
+            <input class="enter" type="text" id="name" name="name"><br>
+            <label for="phone">Телефон:</label>
+            <input class="enter" type="tel" id="phone" name="phone"><br>
+            <label for="city">Город:</label>
+            <input class="enter" type="text" id="city" name="city"><br>
+            <label for="company">Организация:</label>
+            <input class="enter" type="text" id="company" name="company"><br>
             <br>
             <input class="feedback_button btn-primary btn-lg rounded-pill" type="submit" value="Отправить">
         </form>
